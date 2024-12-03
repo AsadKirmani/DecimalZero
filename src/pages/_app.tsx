@@ -11,11 +11,12 @@ const [username, setUsername] = useState<string | null>(null);
 useEffect(() => {
 	if (typeof window !== 'undefined') {
 		const initData = window.Telegram.WebApp.initData;
-
+		const username = JSON.parse(initData.user.first_name);
+		
 		axios.post('/api/validate-hash', { hash: initData }).then((response) => {
 			setIsHashValid(response.status === 200);
 			if (response.status === 200) {
-				setUsername(window.Telegram.WebApp.initData?.user?.first_name || null);
+				setUsername( || null);
 			}
 		}).catch(() => setIsHashValid(false));
 	}}, []);
