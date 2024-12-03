@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
 const [isHashValid, setIsHashValid] = useState(false);
-const [username, setUsername] = useState<string | null>(null);
+const [username, setUsername] = useState(null);
 
 useEffect(() => {
 	if (typeof window !== 'undefined') {
