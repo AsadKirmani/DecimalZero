@@ -6,17 +6,16 @@ import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
 const [isHashValid, setIsHashValid] = useState(false);
-const [username, setUsername] = useState(null);
+const [username, setUsername] = useState<string | null>(null);
 
 useEffect(() => {
 	if (typeof window !== 'undefined') {
 		const initData = window.Telegram.WebApp.initData;
-		const username = JSON.parse(initData.user.first_name);
-		
+
 		axios.post('/api/validate-hash', { hash: initData }).then((response) => {
 			setIsHashValid(response.status === 200);
 			if (response.status === 200) {
-				setUsername(username || null);
+				setUsername(window.Telegram.WebApp.initDataUnsafe?.user?.first_name || null);
 			}
 		}).catch(() => setIsHashValid(false));
 	}}, []);
