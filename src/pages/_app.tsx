@@ -9,16 +9,15 @@ const [isHashValid, setIsHashValid] = useState(false);
 const [username, setUsername] = useState('');
 
 useEffect(() => {
-	if (typeof window !== 'undefined') {
-		const initData = window.Telegram.WebApp.initData;
+		const initData = Telegram.WebApp.initData;
 
 		axios.post('/api/validate-hash', { hash: initData }).then((response) => {
 			setIsHashValid(response.status === 200);
 			if (response.status === 200) {
-				setUsername(window.Telegram.WebApp.initDataUnsafe?.user?.first_name || '');
+				setUsername(Telegram.WebApp.initDataUnsafe?.user?.first_name || '');
 			}
 		}).catch(() => setIsHashValid(false));
-	}}, []);
+}, []);
 	if (!isHashValid) {
 		return null;
 	}
