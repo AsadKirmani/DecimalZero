@@ -15,7 +15,7 @@ useEffect(() => {
 		axios.post('/api/validate-hash', { hash: initData }).then((response) => {
 			setIsHashValid(response.status === 200);
 			if (response.status === 200) {
-				setUsername(window.Telegram.WebApp.initDataUnsafe?.user?.first_name);
+				setUsername(window.Telegram.WebApp.initDataUnsafe?.user?.first_name || '');
 			}
 		}).catch(() => setIsHashValid(false));
 	}}, []);
