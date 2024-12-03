@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
 const [isHashValid, setIsHashValid] = useState(false);
-const [username, setUsername] = useState(null);
+const [username, setUsername] = useState('');
 
 useEffect(() => {
 	if (typeof window !== 'undefined') {
@@ -15,7 +15,7 @@ useEffect(() => {
 		axios.post('/api/validate-hash', { hash: initData }).then((response) => {
 			setIsHashValid(response.status === 200);
 			if (response.status === 200) {
-				setUsername(window.Telegram.WebApp.initDataUnsafe?.user?.first_name || null);
+				setUsername(window.Telegram.WebApp.initDataUnsafe?.user?.first_name);
 			}
 		}).catch(() => setIsHashValid(false));
 	}}, []);
