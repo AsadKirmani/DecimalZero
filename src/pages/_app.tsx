@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
 const [isHashValid, setIsHashValid] = useState(false);
-const [username, setUsername] = useState<string | null>(null);
+const [username, setUsername] = useState(null);
 
 useEffect(() => {
 	if (typeof window !== 'undefined') {
@@ -16,7 +16,7 @@ useEffect(() => {
 		axios.post('/api/validate-hash', { hash: initData }).then((response) => {
 			setIsHashValid(response.status === 200);
 			if (response.status === 200) {
-				setUsername( || null);
+				setUsername(username || null);
 			}
 		}).catch(() => setIsHashValid(false));
 	}}, []);
