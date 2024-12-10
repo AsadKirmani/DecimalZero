@@ -21,6 +21,6 @@ useEffect(() => {
 	if (!isHashValid) {
 		return null;
 	}
-	return <Component {...pageProps} />;
+	return <Component {...pageProps} username={username} />;
 }
 export default MyApp;
